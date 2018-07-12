@@ -12,7 +12,7 @@
 
 /* Group */
 @horizontalSpacing: 1.5em;
-@rowSpacing: 0; /* 2 em */
+@rowSpacing: 2em;
 @groupMargin: 1em -@horizontalSpacing -@rowSpacing;
 
 /* Group Element */
@@ -25,7 +25,7 @@
 
 /* Value */
 @valueFont: @pageFont;
-@valueFontWeight: normal;
+@valueFontWeight: @normal;
 @valueLineHeight: 1em;
 @valueColor: @black;
 @valueTextTransform: uppercase;
@@ -35,7 +35,7 @@
 @topLabelDistance: 0rem;
 @bottomLabelDistance: 0rem;
 @labelFont: @headerFont;
-@labelFontWeight: bold;
+@labelFontWeight: @bold;
 @labelColor: @textColor;
 @labelLineHeight: @relativeLarge;
 @labelTextTransform: uppercase;
@@ -43,7 +43,7 @@
 /* Text */
 @textValueLineHeight: 1em;
 @textValueMinHeight: 2em;
-@textValueFontWeight: bold;
+@textValueFontWeight: @bold;
 
 /* Label Image */
 @imageHeight: 3rem;
@@ -76,29 +76,23 @@
 @miniTextValueSize: 1rem;
 @miniValueSize: 1.5rem;
 @miniHorizontalValueSize: 1.5rem;
-@miniLabelValueSize: 0.75rem;
 
 @tinyTextValueSize: 1rem;
 @tinyValueSize: 2rem;
 @tinyHorizontalValueSize: 2rem;
-@tinyLabelValueSize: 0.8rem;
 
 @smallTextValueSize: 1rem;
 @smallValueSize: 3rem;
 @smallHorizontalValueSize: 2rem;
-@smallLabelValueSize: 1rem;
 
 @textValueSize: 2rem;
 @valueSize: 4rem;
 @horizontalValueSize: 3rem;
-@labelValueSize: 1.25rem;
 
 @largeTextValueSize: 2.5rem;
 @largeValueSize: 5rem;
 @largeHorizontalValueSize: 4rem;
-@largeLabelValueSize: 1.5rem;
 
 @hugeTextValueSize: 2.5rem;
 @hugeValueSize: 6rem;
 @hugeHorizontalValueSize: 5rem;
-@hugeLabelValueSize: 2rem;

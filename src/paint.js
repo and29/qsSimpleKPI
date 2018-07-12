@@ -1,6 +1,8 @@
 import React, { render } from 'react';
 import StatisticBlock from './statisticBlock';
 import NumberFormatter from './numberFormatter';
+//import 'bootstrap';
+//import 'bootstrap/dist/css/bootstrap.min.css';
 
 const DEFAULT_AUTO_FORMAT = '0A';
 
@@ -53,6 +55,9 @@ export default function setupPaint({
   return function paint($element, layout) {
     let self = this;
 
+    /*$(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });*/
     if(!localeInfo) { // && self.backendApi && self.backendApi.localeInfo
       localeInfo = (self.backendApi && self.backendApi.localeInfo);
       if(!localeInfo)
@@ -100,6 +105,10 @@ export default function setupPaint({
           element={($element)[0]}/>
         ,($element)[0]
       );
+    
+
+
+
     })]);
   }  
 }

@@ -276,20 +276,48 @@ let kpis = {
           }
         ]
       },
+      customIconToggle: {
+        type: "boolean",
+        label: "Custom Icon",
+        ref: "qDef.customIconToggle",
+        defaultValue: false
+      },
       itemIcon: {
         type: "string",
         ref: "qDef.valueIcon",
         label: "Icon",
         expression: "always",
         defaultValue: "",
-        show: true
+        show:  function (a) {
+            return !a.qDef.customIconToggle;
+        }
+      },
+      customIcon: {
+        type: "string",
+        ref: "qDef.customValueIcon",
+        label: "Custom Icon",
+        expression: "always",
+        defaultValue: "",
+        show: function (a) {
+            return a.qDef.customIconToggle;
+        }
+      },
+      customTooltip: {
+        type: "string",
+        ref: "qDef.customTooltip",
+        label: "Custom Tooltip",
+        expression: "always",
+        defaultValue: ""
       },
       pickItemIcon: {
         type: "string",
         component: SelectIconDialogComponent(ShowService), //IconsPickerComponent,
         ref: "qDef.valueIcon",
         defaultValue: "",
-        options: FULL_ICONS_SET
+        options: FULL_ICONS_SET, 
+        show:  function (a) {
+            return !a.qDef.customIconToggle;
+        }
       },
       iconPosition: {
         type: "string",
@@ -310,7 +338,7 @@ let kpis = {
         ],
         defaultValue: "label",
         show : function (a) {
-            return a.qDef.valueIcon;
+            return a.qDef.valueIcon || a.qDef.customValueIcon;
         }
       },
       iconOrder: {
@@ -332,7 +360,7 @@ let kpis = {
         ],
         defaultValue: "first",
         show : function (a) {
-            return a.qDef.valueIcon;
+            return a.qDef.valueIcon || a.qDef.customValueIcon;
         }
       },
       iconSize: {
@@ -341,7 +369,7 @@ let kpis = {
         label: "Icon size",
         ref: "qDef.iconSize",
         show: function(a) {
-          return a.qDef.valueIcon;
+          return a.qDef.valueIcon || a.qDef.customValueIcon;
         },
         options: SIZE_OPTIONS,
         defaultValue: ""

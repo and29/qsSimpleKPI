@@ -36,7 +36,7 @@ if(!global.React)
 define(dependencies,
   function (module, qlik, Routing, /*NumberFormatter,*/ ShowService, DragDropService, React) {
     const ROOT_URI = (module && module.uri && module.uri.split('/').slice(0, -1).join('/')) ||
-      '/extensions/qsSimpleKPI';
+      '/extensions/KPIView';
 
     if(!global.Promise)
       global.Promise = Promise;
@@ -44,7 +44,7 @@ define(dependencies,
     const PromiseClass = qlik.Promise || global.Promise;
     let LoadedPromise = new PromiseClass(function(resolve, reject){
       //if(ROOT_URI)
-      loadCSS(`${ROOT_URI}/qsSimpleKPI.css`,
+      loadCSS(`${ROOT_URI}/KPIView.css`,
             function onLoaded() {
               resolve()
             },

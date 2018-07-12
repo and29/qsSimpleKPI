@@ -6,3 +6,5 @@ semantic/tasks/
 
 test/integration/artifacts/*
 !test/integration/artifacts/baseline/
+build/*
+qsSimpleKPI/*

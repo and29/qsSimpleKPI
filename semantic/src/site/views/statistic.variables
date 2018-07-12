@@ -1,3 +1,43 @@
 /*******************************
     User Variable Overrides
 *******************************/
+
+/* Size */
+@miniTextValueSize: 1em;
+@miniValueSize: 1.5em;
+@miniHorizontalValueSize: 1.5em;
+@miniLabelValueSize: 1em;
+
+@tinyTextValueSize: 1em;
+@tinyValueSize: 2em;
+@tinyHorizontalValueSize: 2em;
+@tinyLabelValueSize: 1em;
+
+@smallTextValueSize: 1em;
+@smallValueSize: 2.5em;
+@smallHorizontalValueSize: 2em;
+@smallLabelValueSize: 1.2em;
+
+@textValueSize: 2em;
+@valueSize: 4em;
+@horizontalValueSize: 3em;
+@labelValueSize: 1.25em;
+
+@largeTextValueSize: 2.5em;
+@largeValueSize: 5em;
+@largeHorizontalValueSize: 4em;
+@largeLabelValueSize: 1.5em;
+
+@hugeTextValueSize: 2.5em;
+@hugeValueSize: 6em;
+@hugeHorizontalValueSize: 5em;
+@hugeLabelValueSize: 2em;
+
+@miniIconFontSize: 0.75em;
+@tinyIconFontSize: 1em;
+@smallIconFontSize: 1.25em;
+@mediumIconFontSize: 1.5em;
+@largeIconFontSize: 1.75em;
+@bigIconFontSize: 2em;
+@hugeIconFontSize: 2.5em;
+@massiveIconFontSize: 3em;

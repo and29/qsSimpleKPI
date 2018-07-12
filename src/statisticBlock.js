@@ -21,15 +21,15 @@ class StatisticBlock extends Component {
 
   componentDidMount(){
     var self = this;
-
     // 3.2 SR2 Printing service patch (timeout strange behaviour, 10 equals to 10 sec (instead of 10 msec) in setTimeout)
     const isPrinting = this.isPrinting();
     const checkRequiredSizeDelay = isPrinting ? 1 : 50; //1
     const readyDelay = isPrinting ? 10 : 10000; // 10
     
+
     setTimeout(function(){self.checkRequiredSize();}, checkRequiredSizeDelay);
     // initial resize should not be visible
-    setTimeout(function(){ self.componentReady(); }, readyDelay);
+    setTimeout(function(){ self.componentReady();}, readyDelay);
     //this.componentReady();
   }
 
@@ -211,6 +211,9 @@ class StatisticBlock extends Component {
         labelColor: item.labelColor,
         valueColor: item.valueColor,
         valueIcon: item.valueIcon,
+        customIconToggle: item.customIconToggle,
+        customValueIcon: item.customValueIcon,
+        customTooltip: item.customTooltip,
         iconPosition: item.iconPosition,
         iconOrder: item.iconOrder,
         iconSize: item.iconSize,
@@ -330,7 +333,7 @@ class StatisticBlock extends Component {
         }
         items = (
           <div className={`${verticalAlign}`}>
-          <div className={`ui ${dimensionsOrientation} ${dimShowAsContainer}`} style={segmentsStyle}>
+          <div className={`ui ${dimensionsOrientation} ${dimShowAsContainer}`}  style={segmentsStyle}>
           {
             kpis.qDataPages[0].qMatrix.map(function(dim, dindex){
               const dimensionLabel = dim[dimNo].qText;

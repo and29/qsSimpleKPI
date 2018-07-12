@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {getDivideByValue} from './options';
 import senseDragDropSupport from './senseDragDropSupport';
 import ValueComponent from './ValueComponent';
+import 'popper.js';
+import Tooltip from 'tooltip.js';
 
 
 class Icon extends Component {
@@ -13,6 +15,8 @@ class Icon extends Component {
       value,
       valueIcon,
       iconSize,
+      customIconToggle,
+      customValueIcon,
       infographic
     } = this.props;
     if(infographic) {
@@ -29,19 +33,38 @@ class Icon extends Component {
         </span>
       )
     }
-    else
-      return (<i className={`${valueIcon} ${iconSize}`}></i>);
+    else{
+      if(customIconToggle){
+        var styleItem ={'backgroundImage':customValueIcon,'backgroundSize': 'contain','backgroundRepeat': 'no-repeat'};
+        var classItems= iconSize+' icon';
+        return (<i className={classItems} style={styleItem} ></i>);
+        }
+      else{
+        return (<i className={`${valueIcon} ${iconSize}`}></i>);
+      }
+    }
   }
 };
 
 export default class StatisticItem extends Component {
   constructor(props) {
     super(props);
+    this.setRederedItem = element => {
+      this.rederedItem = element;
+    };
   }
 
   componentDidMount(){
     var self = this;
-    setTimeout(function(){self.checkRequiredSize();}, 100);
+    if(this.props.item.customTooltip!== undefined && this.props.item.customTooltip!==''){
+      new Tooltip(this.rederedItem.getDOMNode(), {
+        placement: 'top', // or bottom, left, right, and variations
+        title: this.props.item.customTooltip,
+        container: document.getElementById("grid-wrap")
+      });
+    }
+
+
   }
 
   componentDidUpdate() {
@@ -78,6 +101,9 @@ export default class StatisticItem extends Component {
       hideValue,
       labelOrientation = "",
       labelOrder,
+      customIconToggle,
+      customValueIcon,
+      customTooltip,
       iconOrder,
       labelColor,
       value, // for Dual contains text repr
@@ -124,11 +150,12 @@ export default class StatisticItem extends Component {
     }).join(" ");
     // <i className={`${valueIcon} ${iconSize}`}></i>
     let iconOrderFirst = iconOrder === "first";
+
     let labelComponent = hideLabel ? null : (
-      <div key="lbl" className="label" style={labelStyles}>
-        {iconOrderFirst && this.props.item.iconPosition === 'label' ? <Icon valueIcon={valueIcon} iconSize={iconSize} value={numericValue} infographic={infographic} /> : null}
+      <div key="lbl" class="label" style={labelStyles}>
+        {iconOrderFirst && this.props.item.iconPosition === 'label' ? <Icon valueIcon={valueIcon} customIconToggle={customIconToggle} customValueIcon={customValueIcon} iconSize={iconSize} value={numericValue} infographic={infographic} /> : null}
         {this.props.item.label}
-        {!iconOrderFirst && this.props.item.iconPosition === 'label' ? <Icon valueIcon={valueIcon} iconSize={iconSize} value={numericValue} infographic={infographic} /> : null}
+       {!iconOrderFirst && this.props.item.iconPosition === 'label' ? <Icon valueIcon={valueIcon} customIconToggle={customIconToggle} customValueIcon={customValueIcon} iconSize={iconSize} value={numericValue} infographic={infographic} /> : null}
       </div>
     );
 
@@ -145,9 +172,9 @@ export default class StatisticItem extends Component {
     };
     let valueComponent = hideValue ? null : (
         <ValueComponent {...valueComponentProps}>
-            {iconOrderFirst && this.props.item.iconPosition === 'value' ? <Icon valueIcon={valueIcon} iconSize={iconSize} value={numericValue} infographic={infographic} /> : null}
+            {iconOrderFirst && this.props.item.iconPosition === 'value' ? <Icon valueIcon={valueIcon} customIconToggle={customIconToggle} customValueIcon={customValueIcon} iconSize={iconSize} value={numericValue} infographic={infographic} /> : null}
             {value /*!infographic ? value : null*/}
-            {!iconOrderFirst && this.props.item.iconPosition === 'value' ? <Icon valueIcon={valueIcon} iconSize={iconSize} value={numericValue} infographic={infographic} /> : null}
+            {!iconOrderFirst && this.props.item.iconPosition === 'value' ? <Icon valueIcon={valueIcon} customIconToggle={customIconToggle} customValueIcon={customValueIcon} iconSize={iconSize} value={numericValue} infographic={infographic} /> : null}
         </ValueComponent>
       );
 
@@ -174,7 +201,8 @@ export default class StatisticItem extends Component {
     let statisticItem = (
       <div className={`statistic statistic-${index+1}`}
           style={statisticStyles}
-          onClick={onClick}>
+          onClick={onClick}
+          ref = {this.setRederedItem}>
         <div className={`ui one ${size} statistics`}>
           <div className={classes}>
             {content}

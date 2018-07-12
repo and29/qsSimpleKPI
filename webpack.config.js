@@ -46,7 +46,12 @@ var config = {
         test: /\.jsx?$/,
         exclude: [/node_modules/, /semantic/],
         loaders: ['babel']
-      },
+      }, 
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+        loaders: ['style-loader', 'css-loader']
+      }
       /*
       {
         test:  /\.css$/,
@@ -69,7 +74,8 @@ var config = {
           loader: 'url-loader?limit=30000&name=[name]-[hash].[ext]'
       }
       */
-    ]
+    ],
+
   },
   // postcss: [
   //   autoprefixer
