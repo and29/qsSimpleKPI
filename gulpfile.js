@@ -26,7 +26,7 @@ var lessFiles = './src/**/*.less';
 var cssFiles = './src/**/*.css';
 var jsFiles = './**/*.js';
 
-var name = path.basename(__dirname);
+var name = "KPIView";//path.basename(__dirname);
 
 var ccsnanoConfig = {
   discardComments: {
@@ -69,6 +69,7 @@ gulp.task('less2css', function(){
   }))
   //.pipe(minifyCSS({keepSpecialComments : 0}))
   .pipe(cssnano(ccsnanoConfig))
+  .pipe(rename(name+'.css'))
   .pipe(gulp.dest(buildDest));
 });
 
@@ -82,6 +83,7 @@ gulp.task('css', function(){
   return gulp.src(cssFiles)
   //.pipe(minifyCSS({keepSpecialComments : 0}))
   .pipe(cssnano(ccsnanoConfig))
+  .pipe(rename(name+'.css'))
   .pipe(gulp.dest(buildDest));
 });
 

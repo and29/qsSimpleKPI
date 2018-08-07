@@ -12,6 +12,7 @@ class StatisticBlock extends Component {
       size: props.options.size,
       clientWidth: props.element.clientWidth,
       clientHeight: props.element.clientHeight,
+      iconSize: props.element.iconSize,
       overflow: null,
       valueFontStyleIndex: null
     };
@@ -23,8 +24,8 @@ class StatisticBlock extends Component {
     var self = this;
     // 3.2 SR2 Printing service patch (timeout strange behaviour, 10 equals to 10 sec (instead of 10 msec) in setTimeout)
     const isPrinting = this.isPrinting();
-    const checkRequiredSizeDelay = isPrinting ? 1 : 50; //1
-    const readyDelay = isPrinting ? 10 : 10000; // 10
+    const checkRequiredSizeDelay = 1//isPrinting ? 1 : 50; //1
+    const readyDelay =10// isPrinting ? 10 : 10000; // 10
     
 
     setTimeout(function(){self.checkRequiredSize();}, checkRequiredSizeDelay);
@@ -49,7 +50,7 @@ class StatisticBlock extends Component {
   }
 
   isPrinting() {
-    return this.props.services.QlikComponent.backendApi.isSnapshot && 
+    return //this.props.services.QlikComponent.backendApi.isSnapshot && 
       this.props.services.Qlik.navigation && 
       !this.props.services.Qlik.navigation.inClient;
   }

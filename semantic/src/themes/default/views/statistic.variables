@@ -96,3 +96,5 @@
 @hugeTextValueSize: 2.5rem;
 @hugeValueSize: 6rem;
 @hugeHorizontalValueSize: 5rem;
+@itemGroupMargin: 0;
+@itemMargin: 0;

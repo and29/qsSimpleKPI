@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component,Fragment} from 'react';
 import {getDivideByValue} from './options';
 import senseDragDropSupport from './senseDragDropSupport';
 import ValueComponent from './ValueComponent';
@@ -56,11 +56,13 @@ export default class StatisticItem extends Component {
 
   componentDidMount(){
     var self = this;
+    setTimeout(function(){self.checkRequiredSize();}, 100);
     if(this.props.item.customTooltip!== undefined && this.props.item.customTooltip!==''){
       new Tooltip(this.rederedItem.getDOMNode(), {
         placement: 'top', // or bottom, left, right, and variations
         title: this.props.item.customTooltip,
-        container: document.getElementById("grid-wrap")
+        container: document.getElementById("grid-wrap"),
+        html: true
       });
     }
 
@@ -123,7 +125,7 @@ export default class StatisticItem extends Component {
       isShow
     } = this.props.item;
 
-    let labelStyles = {padding: "0px 5px", textAlign: textAlignment};
+    let labelStyles = {padding: "0px 5px", textAlign: textAlignment, verticalAlign: "middle"};
     let valueStyles = {padding: "0px 5px", textAlign: textAlignment, color: valueColor};
     // if(embeddedItem && hideLabel)
     //  valueStyles.marginTop = `${QLIK_COMP_TOOLBAR_HEIGHT}px`;
@@ -150,11 +152,10 @@ export default class StatisticItem extends Component {
     }).join(" ");
     // <i className={`${valueIcon} ${iconSize}`}></i>
     let iconOrderFirst = iconOrder === "first";
-
     let labelComponent = hideLabel ? null : (
-      <div key="lbl" class="label" style={labelStyles}>
+      <div key="lbl" className="label middle" style={labelStyles}>
         {iconOrderFirst && this.props.item.iconPosition === 'label' ? <Icon valueIcon={valueIcon} customIconToggle={customIconToggle} customValueIcon={customValueIcon} iconSize={iconSize} value={numericValue} infographic={infographic} /> : null}
-        {this.props.item.label}
+          {this.props.item.label} 
        {!iconOrderFirst && this.props.item.iconPosition === 'label' ? <Icon valueIcon={valueIcon} customIconToggle={customIconToggle} customValueIcon={customValueIcon} iconSize={iconSize} value={numericValue} infographic={infographic} /> : null}
       </div>
     );
