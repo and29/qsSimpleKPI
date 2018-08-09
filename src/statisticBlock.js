@@ -12,12 +12,12 @@ class StatisticBlock extends Component {
       size: props.options.size,
       clientWidth: props.element.clientWidth,
       clientHeight: props.element.clientHeight,
-      iconSize: props.element.iconSize,
+      iconSize: '',
       overflow: null,
       valueFontStyleIndex: null
     };
     this.componentReady = this.componentReady.bind(this);
-    this.kpiItemResizeHandler = this.kpiItemResizeHandler.bind(this);
+    this.kpiItemResizeHandler = this.kpiItemResizeHandler.bind(this); 
   }
 
   componentDidMount(){
@@ -63,6 +63,7 @@ class StatisticBlock extends Component {
     this.setState({
       is_show: true,
       size: size,
+      iconSize: '',
       overflow: null,
       clientWidth: elementClientWidth,
       clientHeight: elementClientHeight,
@@ -107,7 +108,14 @@ class StatisticBlock extends Component {
       let clientWidth = this.state.clientWidth;
       let clientHeight = this.state.clientHeight;
       let childHeight = 0;
-
+      
+      var iconSizeArray=[];
+      var i;
+      for ( i=0; i<this.props.kpis.qMeasureInfo.length;i++){
+        if(getSizeIndex(this.props.kpis.qMeasureInfo[i].iconSize)>=0)
+          iconSizeArray.push(getSizeIndex(this.props.kpis.qMeasureInfo[i].iconSize));
+      }
+      
       if(element.clientHeight == element.scrollHeight
       && this.state.size == this.props.options.size
       && !this.state.overflow) return;
@@ -146,7 +154,14 @@ class StatisticBlock extends Component {
             if(this.state.valueFontStyleIndex !== 0) {
               // trying to reduce font size ...
               this.kpiItemResizeHandler(true);
-            } else
+            } 
+          else if(iconSizeArray.length && (this.state.iconSize=='' || getSizeIndex(this.state.iconSize)> 0) ){
+            //let newSize = ((this.state.iconSize=='')?Math.max(iconSizeArray):getSizeIndex(this.state.iconSize)) - 1;
+            this.setState({
+              iconSize: 'small',//SIZE_OPTIONS[newSize].value,
+            });
+            }
+            else
             if(this.state.overflow !== "auto")
               this.setState({overflow: "auto"}); // ...show scrollbars
           }
@@ -175,14 +190,20 @@ class StatisticBlock extends Component {
     const isShow = this.state.is_show;
     let options = this.props.options;
     let size = this.state.size;
+    let iconSize = this.state.iconSize;
 
     const currentSizeIndex = getSizeIndex(size);
     const originalSizeIndex = getSizeIndex(options.size);
+    const currentIconSizeIndex = getSizeIndex(iconSize);
+    const originalIconSizeIndex = getSizeIndex(options.iconSize);
     let deltaSizeIndex = 0;
     if(originalSizeIndex !== -1 && currentSizeIndex !== -1) {
       deltaSizeIndex = originalSizeIndex - currentSizeIndex;
     }
-
+    let deltaIconSizeIndex = 0;
+    if(originalIconSizeIndex !== -1 && currentIconSizeIndex !== -1) {
+      deltaIconSizeIndex = originalIconSizeIndex - currentIconSizeIndex;
+    }
     const measuresShift = kpis.qDimensionInfo.length;
     const qMeasureInfo = kpis.qMeasureInfo;
     let data = kpis.qDataPages[0].qMatrix.length > 0 && kpis.qDataPages[0].qMatrix[rowindex];
@@ -197,6 +218,8 @@ class StatisticBlock extends Component {
         //if(itemSizeIndex >= SIZE_OPTIONS.length)
         itemSize = SIZE_OPTIONS[itemSizeIndex].value;
       }
+      let itemIconSize = (self.state.iconSize=='' || getSizeIndex(item.iconSize)<getSizeIndex(self.state.iconSize))?item.iconSize:self.state.iconSize;
+
       if(index >= data.length) return;
       const isAttrExps = data[index].qAttrExps && data[index].qAttrExps.qValues.length;
       let overridedLabel;
@@ -217,7 +240,7 @@ class StatisticBlock extends Component {
         customTooltip: item.customTooltip,
         iconPosition: item.iconPosition,
         iconOrder: item.iconOrder,
-        iconSize: item.iconSize,
+        iconSize: itemIconSize,
         ovParams: item.ovParams,
         size: itemSize,
         labelOrder: item.ovParams ? item.labelOrder : options.labelOrder,

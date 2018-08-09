@@ -2,12 +2,12 @@
     User Variable Overrides
 *******************************/
 @miniTextValueSize: 1em;
-@miniValueSize: 1.5em;
+@miniValueSize: 1.1em;
 @miniHorizontalValueSize: 1.5em;
 @miniLabelValueSize: 1em;
 
 @tinyTextValueSize: 1.5em;
-@tinyValueSize: 1.5em;
+@tinyValueSize: 1.3em;
 @tinyHorizontalValueSize: 2em;
 @tinyLabelValueSize: 0.85em;
 
