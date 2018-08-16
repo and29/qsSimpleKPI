@@ -1,6 +1,6 @@
 {
-  "name" : "Simple KPI",
-  "description" : "Simple KPI",
+  "name" : "KPIView",
+  "description" : "KPIView",
   "preview": "preview.png",
   "icon" : "kpi",
   "type" : "visualization",

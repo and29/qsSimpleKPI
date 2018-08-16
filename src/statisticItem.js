@@ -113,6 +113,7 @@ export default class StatisticItem extends Component {
       numericValue, // for Dual contains numeric repr
       valueColor = "",
       valueIcon,
+      iconPosition,
       iconSize = "",
       size = "",
       fontStyles,
@@ -192,20 +193,33 @@ export default class StatisticItem extends Component {
     if (onClick) {
       statisticStyles.cursor = "pointer";
     }
+
+    let inBetweenIcon = null;
+    let minWidthReset = null;
+    if(iconPosition === "inBetween"){
+      inBetweenIcon=(
+        <div  style={{position: 'relative',top: '25%'}}>
+          <Icon valueIcon={valueIcon} customIconToggle={customIconToggle} customValueIcon={customValueIcon} iconSize={iconSize} value={numericValue} infographic={infographic} />
+        </div>
+      );
+      minWidthReset={minWidth:0,position: 'relative', top: '10%'};
+    }
     // *** patch for ios devices ***
     let divPercent = getDivideByValue(this.props.options.divideBy);
     if(divPercent) {
       statisticStyles.width = divPercent + '%';
     }
+    statisticStyles.height=Number(1/kpisRows).toLocaleString(undefined,{style: 'percent'});
     // *** patch for ios dev ***
     // statistic-${index} - allows to use custom style to each measures element
     let statisticItem = (
-      <div className={`statistic statistic-${index+1}`}
+      <div className={`statistic statistic-${index+1}`} 
           style={statisticStyles}
           onClick={onClick}
           ref = {this.setRederedItem}>
-        <div className={`ui one ${size} statistics`}>
-          <div className={classes}>
+        <div className={`ui one ${size} statistics`} style={{height: '100%'}}>
+          {inBetweenIcon}
+          <div className={classes} style={minWidthReset}>
             {content}
           </div>
         </div>

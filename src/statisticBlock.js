@@ -155,7 +155,7 @@ class StatisticBlock extends Component {
               // trying to reduce font size ...
               this.kpiItemResizeHandler(true);
             } 
-          else if(iconSizeArray.length && (this.state.iconSize=='' || getSizeIndex(this.state.iconSize)> 0) ){
+          else if(iconSizeArray.length && this.state.iconSize=='' ){
             //let newSize = ((this.state.iconSize=='')?Math.max(iconSizeArray):getSizeIndex(this.state.iconSize)) - 1;
             this.setState({
               iconSize: 'small',//SIZE_OPTIONS[newSize].value,

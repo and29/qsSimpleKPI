@@ -12,22 +12,22 @@
 @tinyLabelValueSize: 0.85em;
 
 @smallTextValueSize: 1em;
-@smallValueSize: 2.5em;
+@smallValueSize: 2em;
 @smallHorizontalValueSize: 2em;
 @smallLabelValueSize: 1.2em;
 
 @textValueSize: 2em;
-@valueSize: 4em;
+@valueSize: 3em;
 @horizontalValueSize: 3em;
 @labelValueSize: 1.25em;
 
 @largeTextValueSize: 2.5em;
-@largeValueSize: 5em;
+@largeValueSize: 4em;
 @largeHorizontalValueSize: 4em;
 @largeLabelValueSize: 1.5em;
 
 @hugeTextValueSize: 2.5em;
-@hugeValueSize: 6em;
+@hugeValueSize: 5em;
 @hugeHorizontalValueSize: 5em;
 @hugeLabelValueSize: 2em;
 

@@ -331,6 +331,11 @@ let kpis = {
             tooltip: "Value"
           },
           {
+            value: "inBetween",
+            label: "Middle",
+            tooltip: "In Between"
+          },
+          {
             value: "label",
             label: "Label",
             tooltip: "Label"
